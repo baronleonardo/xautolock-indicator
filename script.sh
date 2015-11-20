@@ -1,4 +1,10 @@
 #!/bin/bash
 
-xset -dpms
+if [ $1 == "enable" ]; then
+		xset +dpms
+
+else
+	xset -dpms
+fi
+
 xautolock -$1
