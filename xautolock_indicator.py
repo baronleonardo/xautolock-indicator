@@ -1,7 +1,6 @@
 from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu, QAction
 from PyQt5.QtGui import QIcon
 import sys, os
-from PyQt5 import Qt
 
 current_path = os.path.abspath(os.path.dirname(sys.argv[0])) + "/"
 
@@ -19,7 +18,6 @@ class tray_icon(QSystemTrayIcon):
         right_menu = RightClicked()
         self.setContextMenu(right_menu)
 
-        left_click = LeftClicked(self)
         self.activated.connect(self.toggle)
 
     def set_enabled(self):
