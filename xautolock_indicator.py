@@ -7,6 +7,7 @@ current_path = os.path.abspath(os.path.dirname(sys.argv[0])) + "/"
 class tray_icon(QSystemTrayIcon):
     enabled_icon = "caffeine-cup-full.svg"
     disabled_icon = "caffeine-cup-empty.svg"
+    script_name = "script.sh"
     is_enabled = False
 
     def __init__(self, parent=None):
@@ -15,9 +16,11 @@ class tray_icon(QSystemTrayIcon):
         # Initial state
         self.set_disabled()
 
+        # Right Click
         right_menu = RightClicked()
         self.setContextMenu(right_menu)
 
+        # left click
         self.activated.connect(self.toggle)
 
     def set_enabled(self):
@@ -29,14 +32,17 @@ class tray_icon(QSystemTrayIcon):
         self.setIcon(icon)
 
     def toggle(self, reason):
+        # if left clicked
         if(reason == QSystemTrayIcon.Trigger):
             if(self.is_enabled):
                 self.set_disabled()
                 self.is_enabled = False
+                os.system(current_path + self.script_name + " " + "disable")
 
             else:
                 self.set_enabled()
                 self.is_enabled = True
+                os.system(current_path + self.script_name + " " + "enable")
 
 class RightClicked(QMenu):
     def __init__(self, parent=None):
