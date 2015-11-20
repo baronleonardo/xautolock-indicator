@@ -37,12 +37,14 @@ class tray_icon(QSystemTrayIcon):
             if(self.is_enabled):
                 self.set_disabled()
                 self.is_enabled = False
-                os.system(current_path + self.script_name + " " + "disable")
+                os.system(current_path + self.script_name + " " + "enable")
+                print("Disabled")
 
             else:
                 self.set_enabled()
                 self.is_enabled = True
-                os.system(current_path + self.script_name + " " + "enable")
+                os.system(current_path + self.script_name + " " + "disable")
+                print("Enabled")
 
 class RightClicked(QMenu):
     def __init__(self, parent=None):
